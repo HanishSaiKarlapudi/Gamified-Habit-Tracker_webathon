@@ -7,7 +7,7 @@ export default function Heatmap() {
   const startDate = startOfYear(new Date(currentYear, 0, 1))
   const endDate = endOfYear(new Date(currentYear, 0, 1))
 
-  // Predefined mock data for development (replace this with actual dynamic data in production)
+  // Predefined mock data for development (using hardcoded data directly)
   const data = [
     { date: '2025-01-01', count: 1 }, // Habit completed on January 1, 2025
     { date: '2025-02-14', count: 2 }, // Habit completed on February 14, 2025
@@ -46,7 +46,6 @@ export default function Heatmap() {
     { date: '2025-06-12', count: 3 }, // Habit completed on June 12, 2025
     { date: '2025-06-18', count: 4 }, // Habit completed on June 18, 2025
     { date: '2025-06-22', count: 5 }  // Habit completed on June 22, 2025
-    // Add more mock data as needed
   ]
 
   return (
@@ -55,7 +54,7 @@ export default function Heatmap() {
       <CalendarHeatmap
         startDate={startDate}
         endDate={endDate}
-        values={data}
+        values={data}  // Use the hardcoded data directly here
         classForValue={(value) => {
           if (!value || value.count === 0) return 'color-empty'
           if (value.count < 2) return 'color-scale-1'
@@ -63,7 +62,7 @@ export default function Heatmap() {
           if (value.count < 6) return 'color-scale-3'
           return 'color-scale-4'
         }}
-        showWeekdayLabels = {false}
+        showWeekdayLabels={false}
       />
     </div>
   )

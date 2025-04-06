@@ -21,32 +21,12 @@ export default function Dashboard() {
   const [wishlist] = useAtom(wishlistAtom);
   const wishlistItems = wishlist.items;
 
-  // Get the current year (e.g., 2025)
-  const currentYear = new Date().getFullYear();
-
-  // Set the start and end date for the current year
-  const startDate = new Date(currentYear, 0, 1);  // January 1st of current year
-  const endDate = new Date(currentYear, 11, 31);  // December 31st of current year
-
-  // Step 3: Format Data for the Heatmap (filter data to only include current year)
-  const heatmapData = habits
-    .flatMap(habit => 
-      habit.completions.map(date => ({
-        date,  // The completion date from the completions array
-        count: 1  // Each date in the array represents one completion
-      }))
-    )
-    .filter(({ date }) => {
-      const habitDate = new Date(date);
-      return habitDate >= startDate && habitDate <= endDate;
-    });
-
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Dashboard</h1>
       </div>
-  
+
       {/* Overview Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <CoinBalance coinBalance={balance} />
@@ -57,7 +37,11 @@ export default function Dashboard() {
           coinBalance={balance}
         />
       </div>
-  
+
+      {/* Heatmap Section */}
+      <div className="mt-6">
+        <Heatmap />  {/* Just render the Heatmap component here */}
+      </div>
 
       {/* Community Chat Section */}
       <div className="mt-6">
