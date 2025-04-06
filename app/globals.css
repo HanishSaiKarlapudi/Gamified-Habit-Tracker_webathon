@@ -70,4 +70,29 @@ body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
   }
+  
 }
+/* In styles/globals.css or your global styles file */
+
+/* Override CalendarHeatmap's default styles with higher specificity */
+.react-calendar-heatmap .color-empty {
+  fill: #f0f4f1 !important; /* Light grey for empty days */
+}
+
+.react-calendar-heatmap .color-scale-1 {
+  fill: #a8d5ba !important; /* Light green for lower completion */
+}
+
+.react-calendar-heatmap .color-scale-2 {
+  fill: #6fbf73 !important; /* Medium light green */
+}
+
+.react-calendar-heatmap .color-scale-3 {
+  fill: #2b8c4f !important; /* Stronger green */
+}
+
+.react-calendar-heatmap .color-scale-4 {
+  fill: #1b5e20 !important; /* Dark green for high completion */
+}
+
+
