@@ -30,14 +30,16 @@ export default function Dashboard() {
 
   // Step 3: Format Data for the Heatmap (filter data to only include current year)
   const heatmapData = habits
-    .filter(habit => {
-      const habitDate = new Date(habit.completedDate); // Ensure your habits have a completedDate
+    .flatMap(habit => 
+      habit.completions.map(date => ({
+        date,  // The completion date from the completions array
+        count: 1  // Each date in the array represents one completion
+      }))
+    )
+    .filter(({ date }) => {
+      const habitDate = new Date(date);
       return habitDate >= startDate && habitDate <= endDate;
-    })
-    .map(habit => ({
-      date: habit.completedDate,  // Use the actual date from your habit data (or completed streak)
-      count: habit.completed ? 1 : 0  // You can set any logic for completion (1 if done, 0 if not)
-    }));
+    });
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -56,11 +58,6 @@ export default function Dashboard() {
         />
       </div>
   
-      {/* Heatmap Section */}
-      <div className="mt-6">
-        {/* Pass the filtered heatmap data */}
-        <Heatmap data={heatmapData} />
-      </div>
 
       {/* Community Chat Section */}
       <div className="mt-6">
